@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тарифы — LinguaSchool</title>
+    <!-- Ссылка на локальный файл Bootstrap 5 (вставь свой путь) -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="icon" type="png" href="logo.png">
+    <style>
+        .tariff-card {
+            border: none;
+            border-radius: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tariff-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1) !important;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- Шапка сайта -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="index.html">
+    <img src="logo.png" alt="Логотип" width="34" height="34" class="me-2">
+    LinguaSchool
+</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" href="prices.html">Тарифы</a></li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <!-- Кнопка открытия корзины -->
+                        <button class="btn btn-outline-primary rounded-pill px-4 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                            🛒 Корзина
+                            <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной блок с тарифами -->
+    <main class="container py-5 flex-grow-1">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">Выберите подходящий тариф</h1>
+            <p class="text-muted">Вы можете добавить в корзину пакеты уроков сразу по нескольким языкам</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Тариф 1: Базовый -->
+            <div class="col-lg-4">
+                <div class="card h-100 shadow-sm tariff-card p-4">
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="h4 fw-bold">Старт</h3>
+                        <p class="text-muted small">Для тех, кто хочет попробовать формат или подтянуть базу</p>
+                        <div class="my-3">
+                            <span class="display-6 fw-bold">850 ₽</span>
+                            <span class="text-muted">/ 1 урок</span>
+                        </div>
+                        <ul class="list-unstyled text-muted small mb-4">
+                            <li class="mb-2">✔ Индивидуально с преподавателем (50 мин)</li>
+                            <li class="mb-2">✔ Доступ к интерактивной платформе</li>
+                            <li class="mb-2">✔ Домашние задания с проверкой</li>
+                        </ul>
+
+                        <!-- Выбор языка и количества -->
+                        <div class="mt-auto">
+                            <label class="form-label small fw-bold">Выберите язык:</label>
+                            <select class="form-select mb-2" id="lang-start">
+                                <option value="Английский">Английский</option>
+                                <option value="Испанский">Испанский</option>
+                                <option value="Французский">Французский</option>
+                                <option value="Немецкий">Немецкий</option>
+                            </select>
+
+                            <label class="form-label small fw-bold">Количество уроков:</label>
+                            <input type="number" class="form-control mb-3" id="qty-start" value="4" min="1" max="50">
+
+                            <button class="btn btn-outline-primary w-100 rounded-pill py-2 fw-bold" onclick="addToCart('Тариф «Старт»', 850, 'lang-start', 'qty-start')">
+                                Купить / В корзину
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф 2: Оптимальный -->
+            <div class="col-lg-4">
+                <div class="card h-100 shadow tariff-card p-4 border border-primary border-2 position-relative">
+                    <span class="badge bg-primary rounded-pill px-3 py-2 popular-badge">Популярный выбор</span>
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="h4 fw-bold text-primary">Оптимальный</h3>
+                        <p class="text-muted small">Регулярная практика для уверенного разговорного уровня</p>
+                        <div class="my-3">
+                            <span class="display-6 fw-bold">750 ₽</span>
+                            <span class="text-muted">/ 1 урок</span>
+                        </div>
+                        <ul class="list-unstyled text-muted small mb-4">
+                            <li class="mb-2">✔ Всё, что входит в тариф «Старт»</li>
+                            <li class="mb-2">✔ Разговорные клубы с носителями</li>
+                            <li class="mb-2">✔ Бесплатная заморозка баланса на 14 дней</li>
+                        </ul>
+
+                        <div class="mt-auto">
+                            <label class="form-label small fw-bold">Выберите язык:</label>
+                            <select class="form-select mb-2" id="lang-opt">
+                                <option value="Английский">Английский</option>
+                                <option value="Испанский">Испанский</option>
+                                <option value="Французский">Французский</option>
+                                <option value="Немецкий">Немецкий</option>
+                            </select>
+
+                            <label class="form-label small fw-bold">Количество уроков:</label>
+                            <input type="number" class="form-control mb-3" id="qty-opt" value="8" min="1" max="50">
+
+                            <button class="btn btn-primary w-100 rounded-pill py-2 fw-bold" onclick="addToCart('Тариф «Оптимальный»', 750, 'lang-opt', 'qty-opt')">
+                                Купить / В корзину
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф 3: С носителем языка -->
+            <div class="col-lg-4">
+                <div class="card h-100 shadow-sm tariff-card p-4">
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="h4 fw-bold">С носителем</h3>
+                        <p class="text-muted small">Полное погружение в языковую среду и снятие барьера</p>
+                        <div class="my-3">
+                            <span class="display-6 fw-bold">1 200 ₽</span>
+                            <span class="text-muted">/ 1 урок</span>
+                        </div>
+                        <ul class="list-unstyled text-muted small mb-4">
+                            <li class="mb-2">✔ Занятия с преподавателем-носителем</li>
+                            <li class="mb-2">✔ Подготовка к международным экзаменам</li>
+                            <li class="mb-2">✔ Персональный куратор 24/7</li>
+                        </ul>
+
+                        <div class="mt-auto">
+                            <label class="form-label small fw-bold">Выберите язык:</label>
+                            <select class="form-select mb-2" id="lang-native">
+                                <option value="Английский">Английский</option>
+                                <option value="Испанский">Испанский</option>
+                                <option value="Французский">Французский</option>
+                                <option value="Немецкий">Немецкий</option>
+                            </select>
+
+                            <label class="form-label small fw-bold">Количество уроков:</label>
+                            <input type="number" class="form-control mb-3" id="qty-native" value="4" min="1" max="50">
+
+                            <button class="btn btn-outline-primary w-100 rounded-pill py-2 fw-bold" onclick="addToCart('Тариф «С носителем»', 1200, 'lang-native', 'qty-native')">
+                                Купить / В корзину
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Выдвижная панель корзины (Bootstrap Offcanvas) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold">Ваша корзина</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column">
+            <!-- Список добавленных товаров -->
+            <div id="cart-items" class="flex-grow-1 overflow-auto">
+                <p class="text-muted text-center my-5">Корзина пока пуста</p>
+            </div>
+
+            <!-- Итоговая сумма и форма оформления -->
+            <div class="border-top pt-3 mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="fw-bold">Итого к оплате:</span>
+                    <span class="h4 fw-bold text-primary mb-0" id="cart-total">0 ₽</span>
+                </div>
+                <form onsubmit="checkout(event)">
+                    <input type="text" class="form-control mb-2" placeholder="Ваше имя" required>
+                    <input type="email" class="form-control mb-3" placeholder="Email для доступа к урокам" required>
+                    <button type="submit" class="btn btn-success w-100 rounded-pill py-2 fw-bold" id="checkout-btn" disabled>
+                        Оформить заказ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>                    
+
+  <!-- Сначала скрипт Bootstrap -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Затем наш внешний файл со скриптом корзины -->
+    <script src="cart.js"></script>
+</body>
+</html>
